@@ -12,7 +12,7 @@ import { setUpdateState } from '@renderer/store/runtime'
 import { ThemeMode } from '@renderer/types'
 import { runAsyncFunction } from '@renderer/utils'
 import { UpgradeChannel } from '@shared/config/constant'
-import { Avatar, Button, Progress, Radio, Row, Switch, Tag, Tooltip } from 'antd'
+import { Avatar, Button, Progress, Radio, Row, Tag, Tooltip } from 'antd'
 import { debounce } from 'lodash'
 import { Bug, FileCheck, Github, Globe, Mail, Rss } from 'lucide-react'
 import { BadgeQuestionMark } from 'lucide-react'
@@ -216,7 +216,7 @@ const AboutSettings: FC = () => {
               </Tag>
             </VersionWrapper>
           </Row>
-          {!isPortable && (
+          {/* {!isPortable && (
             <CheckUpdateButton
               onClick={onCheckUpdate}
               loading={update.checking}
@@ -227,11 +227,11 @@ const AboutSettings: FC = () => {
                   ? t('settings.about.checkUpdate.available')
                   : t('settings.about.checkUpdate.label')}
             </CheckUpdateButton>
-          )}
+          )} */}
         </AboutHeader>
         {!isPortable && (
           <>
-            <SettingDivider />
+            {/* <SettingDivider />
             <SettingRow>
               <SettingRowTitle>{t('settings.general.auto_check_update.title')}</SettingRowTitle>
               <Switch value={autoCheckUpdate} onChange={(v) => setAutoCheckUpdate(v)} />
@@ -242,7 +242,7 @@ const AboutSettings: FC = () => {
               <Tooltip title={t('settings.general.test_plan.tooltip')} trigger={['hover', 'focus']}>
                 <Switch value={testPlan} onChange={(v) => handleSetTestPlan(v)} />
               </Tooltip>
-            </SettingRow>
+            </SettingRow> */}
             {testPlan && (
               <>
                 <SettingDivider />

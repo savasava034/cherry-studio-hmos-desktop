@@ -2297,7 +2297,8 @@ export const SYSTEM_MODELS: Record<SystemProviderId | 'defaultModel', Model[]> =
       provider: 'poe',
       group: 'poe'
     }
-  ]
+  ],
+  hmos: []
 }
 
 export const TEXT_TO_IMAGES_MODELS = [

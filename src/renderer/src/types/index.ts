@@ -325,6 +325,7 @@ export type ProviderType =
   | 'vertexai'
   | 'mistral'
   | 'aws-bedrock'
+  | 'hmos'
 
 export type ModelType = 'text' | 'vision' | 'embedding' | 'reasoning' | 'function_calling' | 'web_search' | 'rerank'
 
@@ -764,7 +765,7 @@ export interface MCPConfigSample {
 export interface MCPServer {
   id: string
   name: string
-  type?: 'stdio' | 'sse' | 'inMemory' | 'streamableHttp'
+  type?: 'sse' | 'inMemory' | 'streamableHttp' | 'stdio'
   description?: string
   baseUrl?: string
   command?: string
