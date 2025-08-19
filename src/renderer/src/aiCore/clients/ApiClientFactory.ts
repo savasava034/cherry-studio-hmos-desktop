@@ -8,7 +8,6 @@ import { BaseApiClient } from './BaseApiClient'
 import { GeminiAPIClient } from './gemini/GeminiAPIClient'
 import { VertexAPIClient } from './gemini/VertexAPIClient'
 import { NewAPIClient } from './NewAPIClient'
-import { OllamaApiClient } from './openai/OllamaApiClient'
 import { OpenAIAPIClient } from './openai/OpenAIApiClient'
 import { OpenAIResponseAPIClient } from './openai/OpenAIResponseAPIClient'
 import { PPIOAPIClient } from './ppio/PPIOAPIClient'
@@ -50,8 +49,8 @@ export class ApiClientFactory {
     }
 
     if (provider.id === 'hmos') {
-      console.log(`[ApiClientFactory] Creating AihubmixAPIClient for provider: ${provider.id}`)
-      instance = new OllamaApiClient(provider) as BaseApiClient
+      logger.debug(`[ApiClientFactory] Creating HMOS for provider: ${provider.id}`)
+      instance = new OpenAIAPIClient(provider) as BaseApiClient
       return instance
     }
 

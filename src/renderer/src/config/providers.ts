@@ -69,6 +69,16 @@ export const SYSTEM_PROVIDERS_CONFIG: Record<SystemProviderId, SystemProvider> =
     isSystem: true,
     enabled: true
   },
+  hmos: {
+    id: 'hmos',
+    name: 'Harmony OS AI',
+    type: 'openai',
+    apiKey: '',
+    apiHost: 'http://localhost:11434',
+    models: SYSTEM_MODELS.hmos,
+    isSystem: true,
+    enabled: true
+  },
   aihubmix: {
     id: 'aihubmix',
     name: 'AiHubMix',

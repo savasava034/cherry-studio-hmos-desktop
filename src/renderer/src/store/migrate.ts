@@ -2089,6 +2089,9 @@ const migrateConfig = {
       if (state.nutstore && state.nutstore.nutstoreMaxBackups === undefined) {
         state.nutstore.nutstoreMaxBackups = 0
       }
+      addProvider(state, 'hmos')
+      moveProvider(state.llm.providers, 'hmos', 2)
+
       return state
     } catch (error) {
       logger.error('migrate 130 error', error as Error)

@@ -170,6 +170,10 @@ const MainMenus: FC = () => {
     const path = pathMap[icon]
     const isActive = path === '/' ? isRoute(path) : isRoutes(path)
 
+    if (icon === 'knowledge') {
+      return null
+    }
+
     return (
       <Tooltip key={icon} title={getSidebarIconLabel(icon)} mouseEnterDelay={0.8} placement="right">
         <StyledLink

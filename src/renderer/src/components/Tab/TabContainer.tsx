@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons'
-import { isLinux, isMac, isWin } from '@renderer/config/constant'
+import { isMac } from '@renderer/config/constant'
 import { useTheme } from '@renderer/context/ThemeProvider'
 import { useFullscreen } from '@renderer/hooks/useFullscreen'
 import { useMinappPopup } from '@renderer/hooks/useMinappPopup'
@@ -205,7 +205,7 @@ const TabsBar = styled.div<{ $isFullscreen: boolean }>`
   align-items: center;
   gap: 5px;
   padding-left: ${({ $isFullscreen }) => (!$isFullscreen && isMac ? '75px' : '15px')};
-  padding-right: ${({ $isFullscreen }) => ($isFullscreen ? '12px' : isWin ? '140px' : isLinux ? '120px' : '12px')};
+  padding-right: 140px;
   -webkit-app-region: drag;
   height: var(--navbar-height);
 `

@@ -3,7 +3,7 @@ import { useMinapps } from '@renderer/hooks/useMinapps'
 import { useRuntime } from '@renderer/hooks/useRuntime'
 import { useSettings } from '@renderer/hooks/useSettings'
 import tabsService from '@renderer/services/TabsService'
-import { FileSearch, Folder, Languages, LayoutGrid, Palette, Sparkle, Terminal } from 'lucide-react'
+import { Folder, Languages, LayoutGrid, Palette, Sparkle } from 'lucide-react'
 import { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -23,12 +23,12 @@ const LaunchpadPage: FC = () => {
       path: '/apps',
       bgColor: 'linear-gradient(135deg, #8B5CF6, #A855F7)' // 小程序：紫色，代表多功能和灵活性
     },
-    {
-      icon: <FileSearch size={32} className="icon" />,
-      text: t('title.knowledge'),
-      path: '/knowledge',
-      bgColor: 'linear-gradient(135deg, #10B981, #34D399)' // 知识库：翠绿色，代表生长和知识
-    },
+    // {
+    //   icon: <FileSearch size={32} className="icon" />,
+    //   text: t('title.knowledge'),
+    //   path: '/knowledge',
+    //   bgColor: 'linear-gradient(135deg, #10B981, #34D399)' // 知识库：翠绿色，代表生长和知识
+    // },
     {
       icon: <Palette size={32} className="icon" />,
       text: t('title.paintings'),
@@ -52,13 +52,13 @@ const LaunchpadPage: FC = () => {
       text: t('title.files'),
       path: '/files',
       bgColor: 'linear-gradient(135deg, #F59E0B, #FBBF24)' // 文件：金色，代表资源和重要性
-    },
-    {
-      icon: <Terminal size={32} className="icon" />,
-      text: t('title.code'),
-      path: '/code',
-      bgColor: 'linear-gradient(135deg, #1F2937, #374151)' // Code CLI：高级暗黑色，代表专业和技术
     }
+    // {
+    //   icon: <Terminal size={32} className="icon" />,
+    //   text: t('title.code'),
+    //   path: '/code',
+    //   bgColor: 'linear-gradient(135deg, #1F2937, #374151)' // Code CLI：高级暗黑色，代表专业和技术
+    // }
   ]
 
   // 合并并排序小程序列表

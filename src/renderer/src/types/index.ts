@@ -240,6 +240,7 @@ export type Provider = {
 }
 
 export const SystemProviderIds = {
+  hmos: 'hmos',
   silicon: 'silicon',
   aihubmix: 'aihubmix',
   ocoolai: 'ocoolai',

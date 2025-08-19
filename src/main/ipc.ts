@@ -23,9 +23,9 @@ import DxtService from './services/DxtService'
 import { ExportService } from './services/ExportService'
 import { fileStorage as fileManager } from './services/FileStorage'
 import FileService from './services/FileSystemService'
-import KnowledgeService from './services/KnowledgeService'
+// import KnowledgeService from './services/KnowledgeService'
 import mcpService from './services/MCPService'
-import MemoryService from './services/memory/MemoryService'
+// import MemoryService from './services/memory/MemoryService'
 import { openTraceWindow, setTraceWindowTitle } from './services/NodeTraceService'
 import NotificationService from './services/NotificationService'
 import * as NutstoreService from './services/NutstoreService'
@@ -66,7 +66,7 @@ const backupManager = new BackupManager()
 const exportService = new ExportService()
 const obsidianVaultService = new ObsidianVaultService()
 const vertexAIService = VertexAIService.getInstance()
-const memoryService = MemoryService.getInstance()
+// const memoryService = MemoryService.getInstance()
 const dxtService = new DxtService()
 
 export function registerIpc(mainWindow: BrowserWindow, app: Electron.App) {
@@ -484,46 +484,46 @@ export function registerIpc(mainWindow: BrowserWindow, app: Electron.App) {
   })
 
   // knowledge base
-  ipcMain.handle(IpcChannel.KnowledgeBase_Create, KnowledgeService.create.bind(KnowledgeService))
-  ipcMain.handle(IpcChannel.KnowledgeBase_Reset, KnowledgeService.reset.bind(KnowledgeService))
-  ipcMain.handle(IpcChannel.KnowledgeBase_Delete, KnowledgeService.delete.bind(KnowledgeService))
-  ipcMain.handle(IpcChannel.KnowledgeBase_Add, KnowledgeService.add.bind(KnowledgeService))
-  ipcMain.handle(IpcChannel.KnowledgeBase_Remove, KnowledgeService.remove.bind(KnowledgeService))
-  ipcMain.handle(IpcChannel.KnowledgeBase_Search, KnowledgeService.search.bind(KnowledgeService))
-  ipcMain.handle(IpcChannel.KnowledgeBase_Rerank, KnowledgeService.rerank.bind(KnowledgeService))
-  ipcMain.handle(IpcChannel.KnowledgeBase_Check_Quota, KnowledgeService.checkQuota.bind(KnowledgeService))
+  // ipcMain.handle(IpcChannel.KnowledgeBase_Create, KnowledgeService.create.bind(KnowledgeService))
+  // ipcMain.handle(IpcChannel.KnowledgeBase_Reset, KnowledgeService.reset.bind(KnowledgeService))
+  // ipcMain.handle(IpcChannel.KnowledgeBase_Delete, KnowledgeService.delete.bind(KnowledgeService))
+  // ipcMain.handle(IpcChannel.KnowledgeBase_Add, KnowledgeService.add.bind(KnowledgeService))
+  // ipcMain.handle(IpcChannel.KnowledgeBase_Remove, KnowledgeService.remove.bind(KnowledgeService))
+  // ipcMain.handle(IpcChannel.KnowledgeBase_Search, KnowledgeService.search.bind(KnowledgeService))
+  // ipcMain.handle(IpcChannel.KnowledgeBase_Rerank, KnowledgeService.rerank.bind(KnowledgeService))
+  // ipcMain.handle(IpcChannel.KnowledgeBase_Check_Quota, KnowledgeService.checkQuota.bind(KnowledgeService))
 
   // memory
-  ipcMain.handle(IpcChannel.Memory_Add, async (_, messages, config) => {
-    return await memoryService.add(messages, config)
-  })
-  ipcMain.handle(IpcChannel.Memory_Search, async (_, query, config) => {
-    return await memoryService.search(query, config)
-  })
-  ipcMain.handle(IpcChannel.Memory_List, async (_, config) => {
-    return await memoryService.list(config)
-  })
-  ipcMain.handle(IpcChannel.Memory_Delete, async (_, id) => {
-    return await memoryService.delete(id)
-  })
-  ipcMain.handle(IpcChannel.Memory_Update, async (_, id, memory, metadata) => {
-    return await memoryService.update(id, memory, metadata)
-  })
-  ipcMain.handle(IpcChannel.Memory_Get, async (_, memoryId) => {
-    return await memoryService.get(memoryId)
-  })
-  ipcMain.handle(IpcChannel.Memory_SetConfig, async (_, config) => {
-    memoryService.setConfig(config)
-  })
-  ipcMain.handle(IpcChannel.Memory_DeleteUser, async (_, userId) => {
-    return await memoryService.deleteUser(userId)
-  })
-  ipcMain.handle(IpcChannel.Memory_DeleteAllMemoriesForUser, async (_, userId) => {
-    return await memoryService.deleteAllMemoriesForUser(userId)
-  })
-  ipcMain.handle(IpcChannel.Memory_GetUsersList, async () => {
-    return await memoryService.getUsersList()
-  })
+  // ipcMain.handle(IpcChannel.Memory_Add, async (_, messages, config) => {
+  //   return await memoryService.add(messages, config)
+  // })
+  // ipcMain.handle(IpcChannel.Memory_Search, async (_, query, config) => {
+  //   return await memoryService.search(query, config)
+  // })
+  // ipcMain.handle(IpcChannel.Memory_List, async (_, config) => {
+  //   return await memoryService.list(config)
+  // })
+  // ipcMain.handle(IpcChannel.Memory_Delete, async (_, id) => {
+  //   return await memoryService.delete(id)
+  // })
+  // ipcMain.handle(IpcChannel.Memory_Update, async (_, id, memory, metadata) => {
+  //   return await memoryService.update(id, memory, metadata)
+  // })
+  // ipcMain.handle(IpcChannel.Memory_Get, async (_, memoryId) => {
+  //   return await memoryService.get(memoryId)
+  // })
+  // ipcMain.handle(IpcChannel.Memory_SetConfig, async (_, config) => {
+  //   memoryService.setConfig(config)
+  // })
+  // ipcMain.handle(IpcChannel.Memory_DeleteUser, async (_, userId) => {
+  //   return await memoryService.deleteUser(userId)
+  // })
+  // ipcMain.handle(IpcChannel.Memory_DeleteAllMemoriesForUser, async (_, userId) => {
+  //   return await memoryService.deleteAllMemoriesForUser(userId)
+  // })
+  // ipcMain.handle(IpcChannel.Memory_GetUsersList, async () => {
+  //   return await memoryService.getUsersList()
+  // })
 
   // window
   ipcMain.handle(IpcChannel.Windows_SetMinimumSize, (_, width: number, height: number) => {

@@ -477,10 +477,12 @@ const InputbarTools = ({
   ])
 
   const visibleTools = useMemo(() => {
-    return toolOrder.visible.map((v) => ({
-      ...toolButtons.find((tool) => tool.key === v),
-      visible: true
-    })) as ToolButtonConfig[]
+    return toolOrder.visible
+      .filter((tool) => tool !== 'knowledge_base')
+      .map((v) => ({
+        ...toolButtons.find((tool) => tool.key === v),
+        visible: true
+      })) as ToolButtonConfig[]
   }, [toolButtons, toolOrder])
 
   const hiddenTools = useMemo(() => {

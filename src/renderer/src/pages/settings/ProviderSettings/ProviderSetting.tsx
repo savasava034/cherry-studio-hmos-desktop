@@ -288,7 +288,7 @@ const ProviderSetting: FC<Props> = ({ providerId }) => {
               onChange={(e) => setLocalApiKey(e.target.value)}
               spellCheck={false}
               autoFocus={provider.enabled && provider.apiKey === '' && !isProviderSupportAuth(provider)}
-              disabled={provider.id === 'copilot'}
+              disabled={['copilot', 'hmos'].includes(provider.id)}
               // FIXME：暂时用 prefix。因为 suffix 会被覆盖，实际上不起作用。
               prefix={renderStatusIndicator()}
             />
