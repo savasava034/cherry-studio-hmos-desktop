@@ -7,7 +7,7 @@
     "scripts": {
         "start": "electron .",
         "build": "electron-builder",
-        "dist:win": "electron-builder --win nsis,portable --x64"
+        "dist:win": "electron-builder --win nsis --x64 && electron-builder --win portable --x64"
     },
     "build": {
         "appId": "com.cherry.studio",
@@ -24,9 +24,16 @@
                     "**/*"
                 ]
             }
-        ]
+        ],
+        "win": {
+            "target": [
+                "nsis",
+                "portable"
+            ]
+        }
     },
     "devDependencies": {
+        "electron": "38.4.0",
         "electron-builder": "^24.0.0"
     }
 }
