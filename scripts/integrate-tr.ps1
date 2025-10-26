@@ -1,15 +1,14 @@
+
 Param(
     [string]$Remote = "origin",
+    [string]$ProjectPath = $(Get-Location),
     [switch]$DryRun
 )
 
-# Kullanıcı masaüstü yolu varsayımı: C:\Users\<username>\Desktop\cherry-studio-desktop
-$username = 'savasava034'
-$desktopRoot = Join-Path -Path ([Environment]::GetFolderPath('Desktop')) -ChildPath '..' | ForEach-Object { $_ } # placeholder to keep robust
+# If the user passed a relative ProjectPath, resolve it to absolute
+$projectPath = Resolve-Path -Path $ProjectPath | Select-Object -ExpandProperty Path
 
-# Hesaplanmış projedir: kullanıcı masaüstündeki klasör
-$projectPath = Join-Path -Path (Join-Path -Path ([Environment]::GetFolderPath('Desktop')) -ChildPath 'cherry-studio-desktop') -ChildPath ''
-
+# Default LocalI18nDir location relative to project root
 $LocalI18nDir = Join-Path -Path $projectPath -ChildPath 'src\renderer\src\i18n'
 
 Write-Host "Proje yolu: $projectPath"
@@ -67,16 +66,23 @@ if ($DryRun) {
     exit 0
 }
 
+
 Copy-Item -Path $sourceTr -Destination (Join-Path $targetLocales 'tr-tr.json') -Force
 Write-Host "Dosya kopyalandı: tr-tr.json -> $targetLocales"
 
-git add src\renderer\src\i18n\locales\tr-tr.json
-try {
-    git commit -m "chore(i18n): add Turkish (tr-TR) translations by savasava034" -q
-    Write-Host "Commit oluşturuldu."
+# Only commit if there are changes
+if ((git status --porcelain) -ne '') {
+    git add src\renderer\src\i18n\locales\tr-tr.json
+    try {
+        git commit -m "chore(i18n): add Turkish (tr-TR) translations by savasava034" -q
+        Write-Host "Commit oluşturuldu."
+    }
+    catch {
+        Write-Host "Commit sırasında hata oluştu; devam ediliyor."
+    }
 }
-catch {
-    Write-Host "Commit yapılmadı: Muhtemelen değişiklik yok veya commit sırasında hata oldu. Devam ediliyor."
+else {
+    Write-Host "Commit atlanıyor: Değişiklik yok."
 }
 
 try {

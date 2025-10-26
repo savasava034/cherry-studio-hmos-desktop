@@ -16,7 +16,17 @@ if (hasReact) {
 
 // Load locales shipped with repository. Keep keys consistent with app usage (e.g. 'tr-TR' or 'tr').
 // Adjust the path if your build system moves files; this file expects the JSON next to it under ./locales
-const tr = require('./locales/tr-tr.json')
+let tr: any = {}
+try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    tr = require('./locales/tr-tr.json')
+} catch (err) {
+    // If file isn't bundled in dev environment or was moved, keep empty translations
+    // and log a friendly warning to help debugging in CI / local dev.
+    // Do NOT throw here; missing optional locale shouldn't break app startup.
+    // eslint-disable-next-line no-console
+    console.warn('tr-TR locale could not be loaded from ./locales/tr-tr.json. Falling back to empty translations. Error:', err && err.message ? err.message : err)
+}
 
 const resources: any = {
     'tr-TR': { translation: tr }
