@@ -4,6 +4,10 @@ const fs = require('fs')
 
 // Make the app more robust: try to load a real renderer (file or dev server),
 // otherwise fallback to a minimal data URL so packaging and smoke tests work.
+// NOTE: This is a temporary placeholder main added to allow packaging and testing
+// of translation/locales and Windows installers. For production, replace this
+// with the project's real main entry that wires up IPC, preload scripts, and
+// actual renderer startup logic.
 function createWindow() {
     // Windows need an AppUserModelID for notifications and proper behavior
     try {
