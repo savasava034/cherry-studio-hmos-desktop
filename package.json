@@ -1,0 +1,32 @@
+{
+    "name": "cherry-studio-desktop",
+    "version": "0.0.0",
+    "private": true,
+    "description": "Cherry Studio desktop (minimal package.json added to enable packaging of i18n locales)",
+    "main": "src/main/index.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder",
+        "dist:win": "electron-builder --win nsis,portable --x64"
+    },
+    "build": {
+        "appId": "com.cherry.studio",
+        "files": [
+            "dist/**",
+            "src/**",
+            "build/**"
+        ],
+        "extraResources": [
+            {
+                "from": "src/renderer/src/i18n/locales/",
+                "to": "locales/",
+                "filter": [
+                    "**/*"
+                ]
+            }
+        ]
+    },
+    "devDependencies": {
+        "electron-builder": "^24.0.0"
+    }
+}
