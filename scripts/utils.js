@@ -19,12 +19,28 @@ function downloadNpmPackage(packageName, url) {
   
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(filename)
+    const MAX_REDIRECTS = 5
+    let redirectCount = 0
     
     function makeRequest(requestUrl) {
       https.get(requestUrl, (response) => {
         if (response.statusCode === 301 || response.statusCode === 302) {
           // Handle redirect - follow to new location
-          makeRequest(response.headers.location)
+          redirectCount++
+          if (redirectCount > MAX_REDIRECTS) {
+            cleanup()
+            reject(new Error(`Too many redirects (${MAX_REDIRECTS})`))
+            return
+          }
+          
+          const location = response.headers.location
+          if (!location) {
+            cleanup()
+            reject(new Error('Redirect response missing location header'))
+            return
+          }
+          
+          makeRequest(location)
           return
         }
         
