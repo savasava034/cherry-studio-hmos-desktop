@@ -2,8 +2,6 @@ const fs = require('fs')
 const path = require('path')
 const os = require('os')
 const https = require('https')
-const zlib = require('zlib')
-const { pipeline } = require('stream/promises')
 
 function downloadNpmPackage(packageName, url) {
   const targetDir = path.join('./node_modules/', packageName)
@@ -22,18 +20,22 @@ function downloadNpmPackage(packageName, url) {
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(filename)
     
-    https.get(url, (response) => {
-      if (response.statusCode === 301 || response.statusCode === 302) {
-        // Handle redirect
-        https.get(response.headers.location, handleResponse).on('error', reject)
-        return
-      }
-      
-      handleResponse(response)
-    }).on('error', (err) => {
-      cleanup()
-      reject(err)
-    })
+    function makeRequest(requestUrl) {
+      https.get(requestUrl, (response) => {
+        if (response.statusCode === 301 || response.statusCode === 302) {
+          // Handle redirect - follow to new location
+          makeRequest(response.headers.location)
+          return
+        }
+        
+        handleResponse(response)
+      }).on('error', (err) => {
+        cleanup()
+        reject(err)
+      })
+    }
+    
+    makeRequest(url)
     
     function handleResponse(response) {
       if (response.statusCode !== 200) {
@@ -115,15 +117,10 @@ async function extractTarGz(filename, outputDir) {
   
   // Fallback to command line tar
   const { execSync } = require('child_process')
-  const isWindows = process.platform === 'win32'
   
   try {
-    if (isWindows) {
-      // Windows 10+ has tar command built-in
-      execSync(`tar -xzf "${filename}" -C "${outputDir}"`, { stdio: 'pipe' })
-    } else {
-      execSync(`tar -xzf "${filename}" -C "${outputDir}"`, { stdio: 'pipe' })
-    }
+    // Windows 10+ and modern Unix systems have tar command built-in
+    execSync(`tar -xzf "${filename}" -C "${outputDir}"`, { stdio: 'pipe' })
   } catch (cmdError) {
     throw new Error(`Failed to extract tarball: ${cmdError.message}`)
   }
