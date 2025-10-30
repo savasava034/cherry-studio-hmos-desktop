@@ -80,6 +80,7 @@ export class MemoryService {
 
     try {
       const userDataPath = app.getPath('userData')
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const dbPath = path.join(userDataPath, 'memories.db')
 
       this.db = ''
