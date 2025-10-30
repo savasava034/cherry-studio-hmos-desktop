@@ -34,6 +34,7 @@ const AboutSettings: FC = () => {
   const { update } = useRuntime()
   const { openMinapp } = useMinappPopup()
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onCheckUpdate = debounce(
     async () => {
       if (update.checking || update.downloading) {
@@ -137,6 +138,7 @@ const AboutSettings: FC = () => {
     ]
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSetTestPlan = (value: boolean) => {
     setTestPlan(value)
     dispatch(
@@ -375,6 +377,7 @@ const Description = styled.div`
   text-align: center;
 `
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const CheckUpdateButton = styled(Button)``
 
 const AvatarWrapper = styled.div`
